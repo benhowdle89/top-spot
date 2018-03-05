@@ -123,7 +123,7 @@ export function findTopXTracks() {
         }).slice(0, 50)
         const allTracks = flatten(playlists.map(p => p.tracks))
         const tracks = ordered.map(id => {
-            return allTracks.find(t => t.track.id === id)
+            return allTracks.find(t => (t.track && t.track.id) === id)
         }).filter(Boolean)
         dispatch({
             type: 'TOP_TRACKS',
@@ -155,7 +155,7 @@ export function fetchUserPlaylists() {
             }
         }
 
-        const data = await fetchNextPlaylists("https://api.spotify.com/v1/me/playlists?limit=25")
+        const data = await fetchNextPlaylists("https://api.spotify.com/v1/me/playlists?limit=50")
         dispatch({
             type: 'FETCHED'
         })
