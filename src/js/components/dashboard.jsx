@@ -10,29 +10,34 @@ class Dashboard extends React.Component {
         if (!playlists.length) {
             return this.props.spotifyActions.fetchUserPlaylists()
         }
-        if (!fetched && playlists.length) {
-            return this.props.spotifyActions.findTopXTracks()
-        }
     }
-    componentWillReceiveProps(nextProps) {
-        const { playlists, fetched, topTracks } = this.props.spotify
-        if (!fetched && playlists.length && !topTracks.length) {
-            return this.props.spotifyActions.findTopXTracks()
-        }
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     const { playlists, fetched, topTracks } = this.props.spotify
+    //     if (fetched && playlists.length && !topTracks.length) {
+    //         return this.props.spotifyActions.findTopXTracks()
+    //     }
+    // }
     displayPlaylists(playlists) {
         return <ul>{playlists.map(p => <li>{p.name}</li>)}</ul>
     }
     displayTopTracks(tracks) {
-        return <ul>{tracks.map(t => <li>{t.track.name}</li>)}</ul>
+        return <div>
+            <ul>{tracks.map(t => <li>{t.track.name}</li>)}</ul>
+            <button onClick={this.props.spotifyActions.addPlaylist}>Add this playlist to your account</button>
+        </div>
+    }
+    displayShare() {
+        const { createdUrl } = this.props.spotify
+        return <a href={createdUrl} target="_BLANK">View playlist</a>
     }
     render() {
-        const { fetching, playlists, topTracks } = this.props.spotify
+        const { fetching, playlists, topTracks, createdUrl } = this.props.spotify
         return (
             <div>
                 {fetching && <p>Fetching...</p>}
                 {!!playlists.length && !topTracks.length && this.displayPlaylists(playlists)}
-                {!!topTracks.length && this.displayTopTracks(topTracks)}
+                {!!topTracks.length && !createdUrl && this.displayTopTracks(topTracks)}
+                {createdUrl && this.displayShare()}
             </div>
         )
     }

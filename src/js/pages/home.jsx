@@ -20,7 +20,10 @@ class Home extends React.Component {
     componentDidMount() {
         const { authActions: { authenticated } } = this.props
         const accessToken = parseHashFor('access_token')
-        if (accessToken) return authenticated(accessToken)
+        if (accessToken) {
+            authenticated(accessToken)
+            window.location.hash = ""
+        }
     }
     render() {
         const { accessToken, authActions: { authenticate } } = this.props

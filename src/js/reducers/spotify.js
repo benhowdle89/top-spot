@@ -1,7 +1,10 @@
 const initialState = {
     playlists: [],
     fetching: false,
-    topTracks: []
+    fetched: false,
+    topTracks: [],
+    userID: null,
+    createdUrl: null
 }
 
 export default function auth(state = initialState, action) {
@@ -38,6 +41,22 @@ export default function auth(state = initialState, action) {
             return {
                 ...state,
                 fetching: true
+            }
+        case 'SET_USER_ID':
+            return {
+                ...state,
+                userID: action.userID
+            }
+        case 'CREATED_PLAYLIST':
+            return {
+                ...state,
+                createdUrl: action.url
+            }
+        case 'FETCHED':
+            return {
+                ...state,
+                fetching: false,
+                fetched: true
             }
         default:
             return {

@@ -19,7 +19,7 @@ export default () => {
         loggerMiddleware
     );
 
-    const store = createStore(rootReducer, { spotify: { playlists } }, middlewares);
+    const store = createStore(rootReducer, { spotify: {} }, middlewares);
 
     return { store };
 };
