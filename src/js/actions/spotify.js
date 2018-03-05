@@ -1,4 +1,7 @@
-import fetch from './../etc/fetch'
+import fetch from 'axios'
+import { resolve } from 'path';
+
+const sleep = async amount => new Promise(resolve => setTimeout(resolve, amount))
 
 export function fetchInit() {
     return {
@@ -23,16 +26,26 @@ export function addPlaylists(playlists) {
 export function fetchUserPlaylists() {
     return async (dispatch, getState) => {
         dispatch(fetchInit())
-        const header = {
-            'Authorization': `Bearer ${getState().auth.accessToken}`
-        }
-        const playlists = await fetch('/me/playlists', {
-            headers: {
-                ...header
+
+        const fetchNextPlaylists = async url => {
+            const header = {
+                'Authorization': `Bearer ${getState().auth.accessToken}`
             }
-        })
-        const { data } = playlists
-        dispatch(totalPlaylists(data.total))
-        dispatch(addPlaylists(data.items))
+            const playlists = await fetch(url, {
+                headers: {
+                    ...header
+                }
+            })
+            const { data } = playlists
+            dispatch(totalPlaylists(data.total))
+            dispatch(addPlaylists(data.items))
+            if (data.next) {
+                await sleep(1000)
+                await fetchNextPlaylists(data.next)
+            }
+        }
+
+        const data = await fetchNextPlaylists("https://api.spotify.com/v1/me/playlists", )
+
     }
 }

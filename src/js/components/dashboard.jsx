@@ -9,11 +9,14 @@ class Dashboard extends React.Component {
         this.props.spotifyActions.fetchUserPlaylists()
     }
     render() {
-        const { total, fetching } = this.props.spotify
+        const { total, fetching, playlists } = this.props.spotify
         return fetching ?
             <div>
                 <p>Fetching...</p>
                 <p>Found {total} playlists</p>
+                <ul>
+                    {playlists.map(p => <li>{p.name}</li>)}
+                </ul>
             </div> : <p></p>
 
     }
