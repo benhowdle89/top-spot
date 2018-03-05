@@ -1,1 +1,1 @@
-console.log('hey')
+console.log(process.env.SPOTIFY_CLIENT_ID)
