@@ -1,0 +1,15 @@
+{
+  "name": "top-spot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:benhowdle89/top-spot.git",
+  "author": "Ben Howdle <benhowdle89@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "^1.6.2"
+  },
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  }
+}
