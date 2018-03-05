@@ -28,7 +28,16 @@ class Dashboard extends React.Component {
     }
     displayShare() {
         const { createdUrl } = this.props.spotify
-        return <a href={createdUrl} target="_BLANK">View playlist</a>
+        const encoded = {
+            url: encodeURIComponent(createdUrl),
+            text: 'Check out my Top Spot playlist on Spotify, created with https://top-spot.stream'
+        }
+        return <div>
+            <a href={createdUrl} target="_BLANK">View playlist</a>
+            <a href={`https://twitter.com/share?url=${encoded.url}text=${encoded.text}`}>
+                Tweet
+            </a>
+        </div>
     }
     render() {
         const { fetching, playlists, topTracks, createdUrl } = this.props.spotify
