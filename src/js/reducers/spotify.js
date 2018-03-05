@@ -65,6 +65,12 @@ export default function auth(state = initialState, action) {
                 fetching: false,
                 fetched: true
             }
+        case 'SPOTIFY_ERROR':
+            return {
+                ...state,
+                fetching: false,
+                fetchingTracks: false
+            }
         default:
             return {
                 ...initialState,

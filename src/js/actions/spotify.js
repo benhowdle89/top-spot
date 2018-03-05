@@ -132,37 +132,71 @@ export function findTopXTracks() {
     }
 }
 
+const fetchNextPlaylists = async (url, accessToken) => {
+    const header = {
+        'Authorization': `Bearer ${accessToken}`
+    }
+    let playlists
+    try {
+        playlists = await fetch(url, {
+            headers: {
+                ...header
+            }
+        })
+    } catch (error) {
+        console.error(error)
+    }
+    if (!playlists) return null
+    const { data } = playlists
+    return data
+}
+
 export function fetchUserPlaylists() {
     return async (dispatch, getState) => {
         const { accessToken } = getState().auth
         dispatch(fetchInit())
-        const userID = await fetchCurrentUser(accessToken)
-        dispatch(saveUser(userID))
-        const fetchNextPlaylists = async url => {
-            const header = {
-                'Authorization': `Bearer ${accessToken}`
-            }
-            const playlists = await fetch(url, {
-                headers: {
-                    ...header
-                }
+        let userID
+        try {
+            userID = await fetchCurrentUser(accessToken)
+        } catch (error) {
+            console.error(error)
+            return dispatch({
+                type: 'SPOTIFY_ERROR'
             })
-            const { data } = playlists
-            dispatch(addPlaylists(data.items.filter(playlist => playlist.owner.id === userID)))
-            if (data.next) {
-                await sleep(750)
-                await fetchNextPlaylists(data.next)
+        }
+        dispatch(saveUser(userID))
+        const processPlaylists = async url => {
+            const nextPlaylist = await fetchNextPlaylists(url, accessToken)
+            if (!nextPlaylist) return dispatch({
+                type: 'SPOTIFY_ERROR'
+            })
+            dispatch(addPlaylists(nextPlaylist.items.filter(playlist => playlist.owner.id === userID)))
+            if (nextPlaylist.next) {
+                await sleep(1)
+                await processPlaylists(nextPlaylist.next)
             }
         }
 
-        const data = await fetchNextPlaylists("https://api.spotify.com/v1/me/playlists?limit=50")
+        const data = await processPlaylists("https://api.spotify.com/v1/me/playlists?limit=50")
+
         dispatch({
             type: 'FETCHED'
         })
+        dispatch({
+            type: 'TRACKS_FETCH'
+        })
         const playlists = getState().spotify.playlists
         for (let playlist of playlists) {
-            const tracks = await fetchTracksForPlaylist(playlist.tracks.href, accessToken)
-            await sleep(750)
+            let tracks
+            try {
+                tracks = await fetchTracksForPlaylist(playlist.tracks.href, accessToken)
+            } catch (error) {
+                console.error(error)
+                return dispatch({
+                    type: 'SPOTIFY_ERROR'
+                })
+            }
+            await sleep(1)
             dispatch(addTracks(tracks, playlist.id))
         }
         dispatch(findTopXTracks())

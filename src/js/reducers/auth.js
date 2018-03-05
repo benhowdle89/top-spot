@@ -1,6 +1,5 @@
 const initialState = {
-    accessToken: null,
-    user: null
+    accessToken: null
 }
 
 export default function auth(state = initialState, action) {
@@ -10,6 +9,11 @@ export default function auth(state = initialState, action) {
             return {
                 ...state,
                 accessToken
+            }
+        case 'SPOTIFY_ERROR':
+            return {
+                ...state,
+                accessToken: null
             }
         default:
             return {
