@@ -4,6 +4,7 @@ const initialState = {
     fetched: false,
     fetchingTracks: false,
     topTracks: [],
+    trackFetchingProgress: 0,
     userID: null,
     createdUrl: null
 }
@@ -43,6 +44,12 @@ export default function auth(state = initialState, action) {
             return {
                 ...state,
                 fetchingTracks: true
+            }
+        case 'TRACK_FETCH_PROGRESS':
+            const percent = Math.ceil((action.index / state.playlists.length) * 100)
+            return {
+                ...state,
+                trackFetchingProgress: percent
             }
         case 'FETCH_INIT':
             return {

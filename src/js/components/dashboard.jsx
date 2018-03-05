@@ -11,14 +11,14 @@ class Dashboard extends React.Component {
             return this.props.spotifyActions.fetchUserPlaylists()
         }
     }
-    // componentWillReceiveProps(nextProps) {
-    //     const { playlists, fetched, topTracks } = this.props.spotify
-    //     if (fetched && playlists.length && !topTracks.length) {
-    //         return this.props.spotifyActions.findTopXTracks()
-    //     }
-    // }
+    displayPlaylistsLoading() {
+        return <p>Fetching...</p>
+    }
     displayPlaylists(playlists) {
-        return <ul>{playlists.map(p => <li>{p.name}</li>)}</ul>
+        return <div>
+            <p>Current progress: {this.props.spotify.trackFetchingProgress}%</p>
+            <ul>{playlists.map(p => <li>{p.name}</li>)}</ul>
+        </div>
     }
     displayTopTracks(tracks) {
         return <div>
@@ -43,7 +43,7 @@ class Dashboard extends React.Component {
         const { fetching, playlists, topTracks, createdUrl } = this.props.spotify
         return (
             <div>
-                {fetching && <p>Fetching...</p>}
+                {fetching && this.displayPlaylistsLoading()}
                 {!!playlists.length && !topTracks.length && this.displayPlaylists(playlists)}
                 {!!topTracks.length && !createdUrl && this.displayTopTracks(topTracks)}
                 {createdUrl && this.displayShare()}

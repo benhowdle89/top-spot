@@ -186,7 +186,11 @@ export function fetchUserPlaylists() {
             type: 'TRACKS_FETCH'
         })
         const playlists = getState().spotify.playlists
-        for (let playlist of playlists) {
+        for (let [index, playlist] of playlists.entries()) {
+            dispatch({
+                type: 'TRACK_FETCH_PROGRESS',
+                index
+            })
             let tracks
             try {
                 tracks = await fetchTracksForPlaylist(playlist.tracks.href, accessToken)
