@@ -51,7 +51,7 @@ const createPlaylist = async (accessToken, userID) => {
         'Content-Type': 'application/json'
     }
     const playlist = await fetch.post(`https://api.spotify.com/v1/users/${userID}/playlists`, {
-        name: 'Top Spot'
+        name: '🔝 Top Spot'
     }, {
             headers: {
                 ...header
@@ -177,7 +177,7 @@ export function fetchUserPlaylists() {
             })
             dispatch(addPlaylists(nextPlaylist.items.filter(playlist => playlist.owner.id === userID)))
             if (nextPlaylist.next) {
-                await sleep(1)
+                await sleep(50)
                 await processPlaylists(nextPlaylist.next)
             }
         }
@@ -205,7 +205,7 @@ export function fetchUserPlaylists() {
                     type: 'SPOTIFY_ERROR'
                 })
             }
-            await sleep(1)
+            await sleep(50)
             dispatch(addTracks(tracks, playlist.id))
         }
         dispatch(findTopXTracks())

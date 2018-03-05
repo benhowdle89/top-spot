@@ -12,11 +12,12 @@ class Dashboard extends React.Component {
         }
     }
     displayPlaylistsLoading() {
-        return <p>Fetching...</p>
+        return <p>Fetching your playlists...</p>
     }
     displayPlaylists(playlists) {
+        const progress = this.props.spotify.trackFetchingProgress
         return <div>
-            <p>Current progress: {this.props.spotify.trackFetchingProgress}%</p>
+            {(progress > 0) && <p>Analysing your tracks {progress}%</p>}
             <ul>{playlists.map(p => <li>{p.name}</li>)}</ul>
         </div>
     }
@@ -30,11 +31,11 @@ class Dashboard extends React.Component {
         const { createdUrl } = this.props.spotify
         const encoded = {
             url: encodeURIComponent(createdUrl),
-            text: 'Check out my Top Spot playlist on Spotify, created with https://top-spot.stream'
+            text: 'Check out my 🔝 Top Spot playlist on Spotify, created with https://top-spot.stream'
         }
         return <div>
             <a href={createdUrl} target="_BLANK">View playlist</a>
-            <a href={`https://twitter.com/share?url=${encoded.url}text=${encoded.text}`}>
+            <a href={`https://twitter.com/share?url=${encoded.url}&text=${encoded.text}`}>
                 Tweet
             </a>
         </div>
