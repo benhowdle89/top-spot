@@ -4,8 +4,6 @@ import { createLogger } from "redux-logger";
 
 import reducers from "./../reducers";
 
-import playlists from './../sample.json'
-
 export default () => {
 
     const loggerMiddleware = createLogger();
@@ -19,7 +17,7 @@ export default () => {
         loggerMiddleware
     );
 
-    const store = createStore(rootReducer, { spotify: {} }, middlewares);
+    const store = createStore(rootReducer, {}, middlewares);
 
     return { store };
 };

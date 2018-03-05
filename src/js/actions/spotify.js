@@ -123,7 +123,12 @@ export function findTopXTracks() {
         }).slice(0, 50)
         const allTracks = flatten(playlists.map(p => p.tracks))
         const tracks = ordered.map(id => {
-            return allTracks.find(t => (t.track && t.track.id) === id)
+            const fullTrack = allTracks.find(t => (t.track && t.track.id) === id)
+            if (!fullTrack) return null
+            return {
+                ...fullTrack,
+                occurrences: occurrences[id]
+            }
         }).filter(Boolean)
         dispatch({
             type: 'TOP_TRACKS',

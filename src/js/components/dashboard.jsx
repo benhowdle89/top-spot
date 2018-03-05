@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
     }
     displayTopTracks(tracks) {
         return <div>
-            <ul>{tracks.map(t => <li>{t.track.name}</li>)}</ul>
+            <ul>{tracks.map(t => <li>{t.track.name} ({t.occurrences})</li>)}</ul>
             <button onClick={this.props.spotifyActions.addPlaylist}>Add this playlist to your account</button>
         </div>
     }
