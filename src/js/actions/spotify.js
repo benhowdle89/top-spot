@@ -150,8 +150,8 @@ export function fetchUserPlaylists() {
             const { data } = playlists
             dispatch(addPlaylists(data.items.filter(playlist => playlist.owner.id === userID)))
             if (data.next) {
-                // await sleep(750)
-                // await fetchNextPlaylists(data.next)
+                await sleep(750)
+                await fetchNextPlaylists(data.next)
             }
         }
 
