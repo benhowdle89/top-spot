@@ -1,1 +1,1 @@
-{"dependencies":[{"name":"./js/index.js","dynamic":true}],"generated":{"html":"<html>\n\n<body>\n    <script src=\"/dist/c2a90054bda24711b857b4d07675745c.js\"></script>\n</body>\n\n</html>\n"},"hash":"0998c2883d2c941cdcc4f3286e20bcd7","cacheData":{}}
+{"dependencies":[{"name":"./js/index.js","dynamic":true}],"generated":{"html":"<html>\n\n<body>\n    <div id=\"root\"></div>\n    <script src=\"/dist/c2a90054bda24711b857b4d07675745c.js\"></script>\n</body>\n\n</html>\n"},"hash":"6c35692ae5b441648a383c40c17c72ec","cacheData":{}}
