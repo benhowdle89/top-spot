@@ -1,17 +1,11 @@
 const initialState = {
-    total: 0,
     playlists: [],
-    fetching: false
+    fetching: false,
+    topTracks: []
 }
 
 export default function auth(state = initialState, action) {
     switch (action.type) {
-        case 'PLAYLISTS_TOTAL':
-            const { total } = action
-            return {
-                ...state,
-                total
-            }
         case 'PLAYLISTS_ADD':
             const { playlists } = action
             return {
@@ -20,6 +14,25 @@ export default function auth(state = initialState, action) {
                     ...state.playlists,
                     ...playlists
                 ]
+            }
+        case 'TRACKS_ADD':
+            const { tracks, id } = action
+            return {
+                ...state,
+                playlists: [
+                    ...state.playlists.map(playlist => {
+                        if (playlist.id !== id) return playlist
+                        return {
+                            ...playlist,
+                            tracks
+                        }
+                    })
+                ]
+            }
+        case 'TOP_TRACKS':
+            return {
+                ...state,
+                topTracks: action.tracks
             }
         case 'FETCH_INIT':
             return {

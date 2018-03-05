@@ -6,19 +6,35 @@ import * as spotifyActions from './../actions/spotify'
 
 class Dashboard extends React.Component {
     componentDidMount() {
-        this.props.spotifyActions.fetchUserPlaylists()
+        const { playlists, fetched } = this.props.spotify
+        if (!playlists.length) {
+            return this.props.spotifyActions.fetchUserPlaylists()
+        }
+        if (!fetched && playlists.length) {
+            return this.props.spotifyActions.findTopXTracks()
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        const { playlists, fetched, topTracks } = this.props.spotify
+        if (!fetched && playlists.length && !topTracks.length) {
+            return this.props.spotifyActions.findTopXTracks()
+        }
+    }
+    displayPlaylists(playlists) {
+        return <ul>{playlists.map(p => <li>{p.name}</li>)}</ul>
+    }
+    displayTopTracks(tracks) {
+        return <ul>{tracks.map(t => <li>{t.track.name}</li>)}</ul>
     }
     render() {
-        const { total, fetching, playlists } = this.props.spotify
-        return fetching ?
+        const { fetching, playlists, topTracks } = this.props.spotify
+        return (
             <div>
-                <p>Fetching...</p>
-                <p>Found {total} playlists</p>
-                <ul>
-                    {playlists.map(p => <li>{p.name}</li>)}
-                </ul>
-            </div> : <p></p>
-
+                {fetching && <p>Fetching...</p>}
+                {!!playlists.length && !topTracks.length && this.displayPlaylists(playlists)}
+                {!!topTracks.length && this.displayTopTracks(topTracks)}
+            </div>
+        )
     }
 }
 
