@@ -34,7 +34,7 @@ class Dashboard extends React.Component {
     render() {
         const { fetching, playlists, topTracks, createdUrl } = this.props.spotify
         return (
-            <div>
+            <div className="h-100">
                 {fetching && this.displayPlaylistsLoading()}
                 {!!playlists.length && !topTracks.length && this.displayPlaylists(playlists)}
                 {!!topTracks.length && !createdUrl && this.displayTopTracks(topTracks)}
