@@ -4,41 +4,32 @@ import { connect } from 'react-redux'
 
 import * as spotifyActions from './../actions/spotify'
 
+import Playlists from './playlists'
+import TopTracks from './top-tracks'
+import PlaylistsLoading from './playlists-loading'
+import Share from './share'
+import AddPlaylist from './add-playlist'
+
 class Dashboard extends React.Component {
     componentDidMount() {
-        const { playlists, fetched } = this.props.spotify
+        const { playlists } = this.props.spotify
         if (!playlists.length) {
             return this.props.spotifyActions.fetchUserPlaylists()
         }
     }
     displayPlaylistsLoading() {
-        return <p>Fetching your playlists...</p>
+        return <PlaylistsLoading />
     }
     displayPlaylists(playlists) {
         const progress = this.props.spotify.trackFetchingProgress
-        return <div>
-            {(progress > 0) && <p>Analysing your tracks {progress}%</p>}
-            <ul>{playlists.map(p => <li>{p.name}</li>)}</ul>
-        </div>
+        return <Playlists progress={progress} playlists={playlists} />
     }
     displayTopTracks(tracks) {
-        return <div>
-            <ul>{tracks.map(t => <li>{t.track.name} ({t.occurrences})</li>)}</ul>
-            <button onClick={this.props.spotifyActions.addPlaylist}>Add this playlist to your account</button>
-        </div>
+        return [<TopTracks tracks={tracks} />, <AddPlaylist addPlaylist={this.props.spotifyActions.addPlaylist} />]
     }
     displayShare() {
         const { createdUrl } = this.props.spotify
-        const encoded = {
-            url: encodeURIComponent(createdUrl),
-            text: 'Check out my 🔝 Top Spot playlist on Spotify, created with https://top-spot.stream'
-        }
-        return <div>
-            <a href={createdUrl} target="_BLANK">View playlist</a>
-            <a href={`https://twitter.com/share?url=${encoded.url}&text=${encoded.text}`}>
-                Tweet
-            </a>
-        </div>
+        return <Share url={createdUrl} />
     }
     render() {
         const { fetching, playlists, topTracks, createdUrl } = this.props.spotify

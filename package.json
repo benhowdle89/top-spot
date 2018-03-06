@@ -14,6 +14,7 @@
     "build": "parcel build src/index.html -d build --public-url ./"
   },
   "dependencies": {
+    "autoprefixer": "^8.1.0",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",

@@ -1,0 +1,71 @@
+html {
+    font-size: 16px;
+}
+
+body {
+    /* background: linear-gradient(to bottom right, #2F0743, #41295a) */
+    background: #000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo {
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    font-weight: 500;
+    font-size: 1.8rem;
+}
+
+.logo span {
+    font-weight: 700
+}
+
+.login-button {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.login-button:hover {
+    border-color: rgba(255, 255, 255, 0.5)
+}
+
+.spotify-logo {
+    max-width: 72px;
+}
+
+.playlists {
+    display: grid;
+    padding: 0.25rem;
+    grid-gap: 0.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+}
+
+.playlist-name-panel {
+    background: #fff;
+    border-top: 0.25rem solid #000;
+}
+
+.playlist-name {
+    color: #000;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+.playlist-image {
+    background: red;
+}

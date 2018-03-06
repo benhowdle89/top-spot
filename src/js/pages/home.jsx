@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import * as authActions from './../actions/auth'
 
 import Dashboard from './../components/dashboard'
+import Login from './../components/login'
 
 const parseHashFor = param => {
     const hash = (window.location.hash || "").substring(1);
@@ -27,7 +28,7 @@ class Home extends React.Component {
     }
     render() {
         const { accessToken, authActions: { authenticate } } = this.props
-        return accessToken ? <Dashboard /> : <button onClick={authenticate}>Login with Spotify</button>
+        return accessToken ? <Dashboard /> : <Login authenticate={authenticate} />
     }
 }
 
