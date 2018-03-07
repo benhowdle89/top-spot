@@ -226,7 +226,7 @@ export function fetchUserPlaylists() {
                     type: 'SPOTIFY_ERROR'
                 })
             }
-            let nextSleep = !tracks ? 2000 : 100
+            let nextSleep = !tracks ? 2000 : 50
             await sleep(nextSleep)
             dispatch(addTracks(tracks, playlist.id))
         }
