@@ -1,10 +1,8 @@
 import React from 'react'
 import TopTrack from './top-track'
 const TopTracks = ({ tracks }) => {
-    return <div>
-        <ul>
-            {tracks.map(track => <TopTrack track={track} />)}
-        </ul>
+    return <div className="top-tracks mb4">
+        {tracks.map(track => <TopTrack track={track} />)}
     </div>
 }
 export default TopTracks

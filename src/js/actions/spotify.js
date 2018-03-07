@@ -79,6 +79,9 @@ const addTracksToPlaylist = async (accessToken, userID, playlistID, tracks) => {
 
 export function addPlaylist() {
     return async (dispatch, getState) => {
+        dispatch({
+            type: 'CREATING_PLAYLIST'
+        })
         const { accessToken } = getState().auth
         const { userID, topTracks } = getState().spotify
         const { id: playlistID, url } = await createPlaylist(accessToken, userID)
@@ -170,7 +173,9 @@ export function fetchUserPlaylists() {
                 type: 'SPOTIFY_ERROR'
             })
         }
+
         dispatch(saveUser(userID))
+
         const processPlaylists = async url => {
             const nextPlaylist = await fetchNextPlaylists(url, accessToken)
             if (!nextPlaylist) return dispatch({
@@ -184,7 +189,7 @@ export function fetchUserPlaylists() {
         }
 
         const data = await processPlaylists("https://api.spotify.com/v1/me/playlists?limit=50")
-
+        await sleep(5000)
         dispatch({
             type: 'FETCHED'
         })

@@ -18,14 +18,25 @@ class Dashboard extends React.Component {
         }
     }
     displayPlaylistsLoading() {
-        return <PlaylistsLoading />
+        return <PlaylistsLoading message="Fetching your playlists" />
     }
     displayPlaylists(playlists) {
-        const progress = this.props.spotify.trackFetchingProgress
-        return <Playlists progress={progress} playlists={playlists} />
+        const { fetchingTracks, trackFetchingProgress: progress } = this.props.spotify
+        const output = [<Playlists playlists={playlists} />]
+        if (fetchingTracks) {
+            output.unshift(<PlaylistsLoading message="Analysing your tracks" progress={progress} />)
+        }
+        return output
     }
     displayTopTracks(tracks) {
-        return [<TopTracks tracks={tracks} />, <AddPlaylist addPlaylist={this.props.spotifyActions.addPlaylist} />]
+        const { addPlaylist } = this.props.spotifyActions
+        const { creatingPlaylist } = this.props.spotify
+        return <div className="top-tracks-container p4 max-width-2 mx-auto flex justify-center items-center flex-column">
+            {[
+                <TopTracks tracks={tracks} />,
+                <AddPlaylist addPlaylist={addPlaylist} creatingPlaylist={creatingPlaylist} />
+            ]}
+        </div>
     }
     displayShare() {
         const { createdUrl } = this.props.spotify

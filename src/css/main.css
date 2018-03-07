@@ -31,11 +31,12 @@ img {
     font-weight: 700
 }
 
-.login-button {
+.spotify-button {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 9px;
     cursor: pointer;
     transition: all 0.3s;
+    display: inline-flex;
 }
 
 .login-button:hover {
@@ -46,18 +47,50 @@ img {
     max-width: 72px;
 }
 
+.playlists-loading {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    border-radius: 9px;
+    background: rgba(0,0,0, 0.85)
+}
+
+.playlist-loading-text {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    font-size: 1rem;
+}
+
+.progress-container {
+    width: 100%;
+    height: 0.3rem;
+    border-radius: 9px;
+    background: rgba(0,0,0,0.8);
+}
+
+.progress-bar {
+    height: 100%;
+    display: block;
+    background: #1ED760;
+    border-radius: 9px;
+}
+
 .playlists {
-    padding: 0.25rem;
+    padding: 10px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
 }
 
 .playlist {
-    position: absolute;
-    transform-origin: 50% -50%;
-    backface-visibility: hidden;
+    
 }
 
 .playlist:last-child {
-    position: relative;
+    
 }
 
 .playlist-name-panel {
@@ -74,8 +107,6 @@ img {
 }
 
 .playlist-image {
-    width: 200px;
-    height: 200px;
     object-fit: cover;
     display: block;
     overflow: hidden;

@@ -6,7 +6,8 @@ const initialState = {
     topTracks: [],
     trackFetchingProgress: 0,
     userID: null,
-    createdUrl: null
+    createdUrl: null,
+    creatingPlaylist: false
 }
 
 export default function auth(state = initialState, action) {
@@ -64,7 +65,13 @@ export default function auth(state = initialState, action) {
         case 'CREATED_PLAYLIST':
             return {
                 ...state,
-                createdUrl: action.url
+                createdUrl: action.url,
+                creatingPlaylist: false
+            }
+        case 'CREATING_PLAYLIST':
+            return {
+                ...state,
+                creatingPlaylist: true
             }
         case 'FETCHED':
             return {

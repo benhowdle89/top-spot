@@ -1,3 +1,10 @@
 import React from 'react'
-const AddPlaylist = ({ addPlaylist }) => <button onClick={addPlaylist}>Add this playlist to your account</button>
+import Button from './button'
+import Loader from './loader'
+const AddPlaylist = ({ addPlaylist, creatingPlaylist }) => {
+    if (creatingPlaylist) return <Loader />
+    return <div>
+        <Button onClick={addPlaylist} text="Create this playlist" />
+    </div>
+}
 export default AddPlaylist
