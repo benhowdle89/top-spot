@@ -5,7 +5,7 @@ const colours = ['green', 'red-purple', 'retro', 'blue-light', 'blue', 'dark-red
 
 const Playlist = ({ playlist, index }) => {
     const { images = [] } = playlist
-    const [small, medium = {}, large] = images
+    const [large, medium = {}, small] = images
     const randomColour = colours[Math.floor(Math.random() * colours.length)]
     const imageClassName = `playlist-image-${randomColour}`
     return <div className="playlist inline-block">

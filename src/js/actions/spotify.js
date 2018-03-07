@@ -50,13 +50,20 @@ const createPlaylist = async (accessToken, userID) => {
         'Authorization': `Bearer ${accessToken}`,
         'Content-Type': 'application/json'
     }
-    const playlist = await fetch.post(`https://api.spotify.com/v1/users/${userID}/playlists`, {
-        name: '🔝 Top Spot'
-    }, {
-            headers: {
-                ...header
-            }
-        })
+    let playlist
+    try {
+        playlist = await fetch.post(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+            name: '🔝 Top Spot'
+        }, {
+                headers: {
+                    ...header
+                }
+            })
+    } catch (error) {
+        console.error(error)
+        return null
+    }
+
     const { data } = playlist
     return {
         id: data.id,
@@ -68,13 +75,17 @@ const addTracksToPlaylist = async (accessToken, userID, playlistID, tracks) => {
     const header = {
         'Authorization': `Bearer ${accessToken}`
     }
-    await fetch.post(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
-        uris: tracks
-    }, {
-            headers: {
-                ...header
-            }
-        })
+    try {
+        await fetch.post(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
+            uris: tracks
+        }, {
+                headers: {
+                    ...header
+                }
+            })
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export function addPlaylist() {
@@ -84,7 +95,11 @@ export function addPlaylist() {
         })
         const { accessToken } = getState().auth
         const { userID, topTracks } = getState().spotify
-        const { id: playlistID, url } = await createPlaylist(accessToken, userID)
+        const playlist = await createPlaylist(accessToken, userID)
+        if (!playlist) return dispatch({
+            type: 'SPOTIFY_ERROR'
+        })
+        const { id: playlistID, url } = playlist
         const tracks = topTracks.map(t => t.track.uri)
         await addTracksToPlaylist(accessToken, userID, playlistID, tracks)
         dispatch({
@@ -189,7 +204,7 @@ export function fetchUserPlaylists() {
         }
 
         const data = await processPlaylists("https://api.spotify.com/v1/me/playlists?limit=50")
-        await sleep(5000)
+        await sleep(3000)
         dispatch({
             type: 'FETCHED'
         })

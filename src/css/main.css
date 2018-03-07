@@ -10,6 +10,7 @@ body {
     -webkit-font-smoothing: antialiased;
     color: #fff;
     font-size: 1rem;
+    line-height: 1.6;
 }
 
 .h-100 {
@@ -18,6 +19,12 @@ body {
 
 img {
     max-width: 100%;
+}
+
+a {
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
 }
 
 .logo {
@@ -31,12 +38,21 @@ img {
     font-weight: 700
 }
 
+.share > *, .login > * {
+    margin: 0 10px;
+}
+
+.intro {
+    width: 30%;
+}
+
 .spotify-button {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 9px;
     cursor: pointer;
     transition: all 0.3s;
     display: inline-flex;
+    height: 1.6rem;
 }
 
 .login-button:hover {
@@ -45,6 +61,10 @@ img {
 
 .spotify-logo {
     max-width: 72px;
+}
+
+.twitter-logo {
+    max-width: 28px;
 }
 
 .playlists-loading {
@@ -76,6 +96,32 @@ img {
     display: block;
     background: #1ED760;
     border-radius: 9px;
+}
+
+.top-tracks {
+    padding: 10px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+}
+
+.track-meta {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+    background: rgba(0,0,0, 0.75);
+    color: #fff;
+    font-size: 0.8rem;
+}
+
+.artist-name {
+
+}
+
+.track-name {
+    font-weight: 700;
+    font-size: 1rem;
 }
 
 .playlists {
@@ -332,3 +378,25 @@ img {
     background-color: #F9ED3A;
     mix-blend-mode: multiply;
 }
+
+.fade-enter {
+    opacity: 0.01;
+    transform: translateY(50px);
+  }
+   
+  .fade-enter.fade-enter-active) {
+    transition: opacity 250ms ease-in;
+    opacity: 1;
+  }
+   
+  .fade-appear { opacity: 0.01; }
+  .fade-appear.fade-appear-active { opacity: 1; transition: opacity 250ms ease-in; }
+   
+  .fade-leave {
+    opacity: 1;
+  }
+   
+  .fade-leave.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 100ms ease-in;
+  }

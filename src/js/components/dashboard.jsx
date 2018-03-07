@@ -31,10 +31,10 @@ class Dashboard extends React.Component {
     displayTopTracks(tracks) {
         const { addPlaylist } = this.props.spotifyActions
         const { creatingPlaylist } = this.props.spotify
-        return <div className="top-tracks-container p4 max-width-2 mx-auto flex justify-center items-center flex-column">
+        return <div className="top-tracks-container p2 pt4 center max-width-4 mx-auto">
             {[
-                <TopTracks tracks={tracks} />,
-                <AddPlaylist addPlaylist={addPlaylist} creatingPlaylist={creatingPlaylist} />
+                <AddPlaylist addPlaylist={addPlaylist} creatingPlaylist={creatingPlaylist} />,
+                <TopTracks tracks={tracks} />
             ]}
         </div>
     }
