@@ -33,6 +33,7 @@ class Dashboard extends React.Component {
         const { creatingPlaylist } = this.props.spotify
         return <div className="top-tracks-container p2 pt4 center max-width-4 mx-auto">
             {[
+                <h2 className="mb2">These are the top tracks you've added to your playlists</h2>,
                 <AddPlaylist addPlaylist={addPlaylist} creatingPlaylist={creatingPlaylist} />,
                 <TopTracks tracks={tracks} />
             ]}

@@ -35,10 +35,14 @@ a {
 }
 
 .logo span {
-    font-weight: 700
+    font-weight: 700;
 }
 
-.share > *, .login > * {
+.logo .logo-arrow {
+    font-weight: 900;
+}
+
+.share>*, .login>* {
     margin: 0 10px;
 }
 
@@ -74,7 +78,7 @@ a {
     top: 50%;
     z-index: 10;
     border-radius: 9px;
-    background: rgba(0,0,0, 0.85)
+    background: rgba(0, 0, 0, 0.85)
 }
 
 .playlist-loading-text {
@@ -88,7 +92,7 @@ a {
     width: 100%;
     height: 0.3rem;
     border-radius: 9px;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .progress-bar {
@@ -99,10 +103,11 @@ a {
 }
 
 .top-tracks {
-    padding: 10px;
+    padding: 0.5rem;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 1fr;
 }
 
 .track-meta {
@@ -110,34 +115,36 @@ a {
     left: 0.5rem;
     right: 0.5rem;
     z-index: 10;
-    background: rgba(0,0,0, 0.75);
+    background: rgba(0, 0, 0, 0.75);
     color: #fff;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
-.artist-name {
-
-}
+.artist-name {}
 
 .track-name {
     font-weight: 700;
     font-size: 1rem;
 }
 
+.track-occurrences {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+
 .playlists {
     padding: 10px;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .playlist {
-    opacity: 0.7;
+    opacity: 0.2;
 }
 
-.playlist:last-child {
-    
-}
+.playlist:last-child {}
 
 .playlist-name-panel {
     background: #fff;
@@ -378,25 +385,3 @@ a {
     background-color: #F9ED3A;
     mix-blend-mode: multiply;
 }
-
-.fade-enter {
-    opacity: 0.01;
-    transform: translateY(50px);
-  }
-   
-  .fade-enter.fade-enter-active) {
-    transition: opacity 250ms ease-in;
-    opacity: 1;
-  }
-   
-  .fade-appear { opacity: 0.01; }
-  .fade-appear.fade-appear-active { opacity: 1; transition: opacity 250ms ease-in; }
-   
-  .fade-leave {
-    opacity: 1;
-  }
-   
-  .fade-leave.fade-leave-active {
-    opacity: 0.01;
-    transition: opacity 100ms ease-in;
-  }

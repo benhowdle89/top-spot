@@ -197,10 +197,10 @@ export function fetchUserPlaylists() {
                 type: 'SPOTIFY_ERROR'
             })
             dispatch(addPlaylists(nextPlaylist.items.filter(playlist => playlist.owner.id === userID)))
-            // if (nextPlaylist.next) {
-            //     await sleep(50)
-            //     await processPlaylists(nextPlaylist.next)
-            // }
+            if (nextPlaylist.next) {
+                await sleep(50)
+                await processPlaylists(nextPlaylist.next)
+            }
         }
 
         const data = await processPlaylists("https://api.spotify.com/v1/me/playlists?limit=50")
@@ -226,7 +226,7 @@ export function fetchUserPlaylists() {
                     type: 'SPOTIFY_ERROR'
                 })
             }
-            let nextSleep = !tracks ? 2000 : 200
+            let nextSleep = !tracks ? 2000 : 100
             await sleep(nextSleep)
             dispatch(addTracks(tracks, playlist.id))
         }
