@@ -132,7 +132,7 @@ a {
 }
 
 .playlist {
-    
+    opacity: 0.7;
 }
 
 .playlist:last-child {

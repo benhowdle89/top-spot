@@ -139,7 +139,7 @@ export function findTopXTracks() {
         }, {})
         const ordered = Object.keys(occurrences).sort((a, b) => {
             return occurrences[b] - occurrences[a]
-        }).slice(0, 50)
+        }).slice(0, 30)
         const allTracks = flatten(playlists.map(p => p.tracks))
         const tracks = ordered.map(id => {
             const fullTrack = allTracks.find(t => (t.track && t.track.id) === id)
@@ -226,7 +226,7 @@ export function fetchUserPlaylists() {
                     type: 'SPOTIFY_ERROR'
                 })
             }
-            let nextSleep = !tracks ? 2000 : 50
+            let nextSleep = !tracks ? 2000 : 200
             await sleep(nextSleep)
             dispatch(addTracks(tracks, playlist.id))
         }

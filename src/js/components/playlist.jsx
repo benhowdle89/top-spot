@@ -18,10 +18,3 @@ const Playlist = ({ playlist, index }) => {
     </div>
 }
 export default Playlist
-
-
-// <div className="playlist-name-panel p2">
-//             <p className="playlist-name center">
-//                 {playlist.name}
-//             </p>
-//         </div>
