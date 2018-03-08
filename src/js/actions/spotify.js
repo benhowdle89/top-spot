@@ -134,7 +134,7 @@ export function findTopXTracks() {
         const occurrences = playlists.reduce((accum, current) => {
             const tracks = current.tracks.map(t => t.track && t.track.id)
             tracks.forEach(t => {
-                accum[t] = (accum[t] !== undefined) ? accum[t] + 1 : 0
+                accum[t] = (accum[t] !== undefined) ? accum[t] + 1 : 1
             })
             return accum
         }, {})
