@@ -61,10 +61,10 @@ h2 {
 
 @keyframes slide {
     0% {
-        background-position: 50% 0%
+        background-position: 50% 0%;
     }
     100% {
-        background-position: 50% 50%
+        background-position: 50% 2000px;
     }
 }
 
@@ -73,12 +73,11 @@ h2 {
     -webkit-background-clip: text;
     background-image: url('./../images/scroll-bg.jpg');
     background-repeat: repeat;
-    background-position: 50% 0%;
     line-height: 40vh;
     font-size: 11rem;
     font-weight: 900;
     -webkit-text-stroke: 5px rgba(0, 0, 0, 0.3);
-    animation: slide 6s linear infinite;
+    animation: slide 22s linear infinite;
 }
 
 .spotify-button {
@@ -437,8 +436,8 @@ h2 {
         padding: 4rem 2rem;
     }
     .splash .logo {
-        font-size: 6rem;
-        line-height: 20vh;
+        font-size: 7rem;
+        line-height: 15vh;
     }
     .share {
         flex-direction: column;
