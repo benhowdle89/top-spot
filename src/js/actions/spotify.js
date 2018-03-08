@@ -53,7 +53,7 @@ const createPlaylist = async (accessToken, userID) => {
     let playlist
     try {
         playlist = await fetch.post(`https://api.spotify.com/v1/users/${userID}/playlists`, {
-            name: '🔝 Top Spot',
+            name: 'Top Spot',
             public: false
         }, {
                 headers: {
