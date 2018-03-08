@@ -11,6 +11,7 @@ body {
     color: #fff;
     font-size: 1rem;
     line-height: 1.6;
+    overflow: auto;
 }
 
 .h-100 {
@@ -51,12 +52,8 @@ h2 {
     margin: 0 10px;
 }
 
-.deets {
-    height: 60%;
-}
-
 .splash {
-    height: 40%;
+    height: 35vh;
 }
 
 @keyframes slide {
@@ -424,16 +421,32 @@ h2 {
     /* background: rgba(0, 0, 0, 0.8); */
 }
 
-.app {
-    overflow: auto;
-}
+.app {}
 
 @media (max-width: 980px) {
+    .splash .logo {
+        font-size: 10rem;
+        line-height: 35vh;
+    }
+}
+
+@media (max-width: 830px) {
     .app {
         padding: 1rem;
     }
     .deets {
-        padding: 4rem 2rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+    .footer {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .splash {
+        padding-top: 2rem;
     }
     .splash .logo {
         font-size: 7rem;
