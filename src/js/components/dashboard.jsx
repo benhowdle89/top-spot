@@ -9,11 +9,12 @@ import TopTracks from './top-tracks'
 import PlaylistsLoading from './playlists-loading'
 import Share from './share'
 import AddPlaylist from './add-playlist'
+import Empty from './empty'
 
 class Dashboard extends React.Component {
     componentDidMount() {
-        const { playlists } = this.props.spotify
-        if (!playlists.length) {
+        const { playlists, fetched } = this.props.spotify
+        if (!playlists.length && !fetched) {
             return this.props.spotifyActions.fetchUserPlaylists()
         }
     }
@@ -39,17 +40,25 @@ class Dashboard extends React.Component {
             ]}
         </div>
     }
+    displayEmpty(type) {
+        let message
+        if (type === 'playlists') message = `We couldn't find any usable playlists, sorry!`
+        else if (type === 'tracks') message = `We couldn't find any tracks to use, sorry!`
+        return <Empty message={message} />
+    }
     displayShare() {
         const { createdUrl } = this.props.spotify
         return <Share url={createdUrl} />
     }
     render() {
-        const { fetching, playlists, topTracks, createdUrl } = this.props.spotify
+        const { fetching, fetched, playlists, topTracks, fetchingTracks, createdUrl } = this.props.spotify
         return (
             <div className="h-100">
                 {fetching && this.displayPlaylistsLoading()}
                 {!!playlists.length && !topTracks.length && this.displayPlaylists(playlists)}
+                {!fetching && !playlists.length && this.displayEmpty('playlists')}
                 {!!topTracks.length && !createdUrl && this.displayTopTracks(topTracks)}
+                {!fetching && fetched && playlists.length && !topTracks.length && !fetchingTracks && this.displayEmpty('tracks')}
                 {createdUrl && this.displayShare()}
             </div>
         )
