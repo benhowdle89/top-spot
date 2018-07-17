@@ -6,8 +6,7 @@
   "author": "Ben Howdle <benhowdle89@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "parcel-bundler": "^1.6.2"
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
   },
   "scripts": {
     "dev": "parcel src/index.html",
@@ -23,6 +22,7 @@
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "parcel-bundler": "^1.6.2"
   }
 }
